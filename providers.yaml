@@ -1,0 +1,219 @@
+# Provider/model configuration verified against the vendors' official docs on
+# 2026-09-21. Prices are USD per 1M tokens. Re-check prices and data terms
+# immediately before a paid run; the notes below record time/region assumptions.
+arms:
+  deepseek-flash@off:
+    name: deepseek-flash@off
+    provider: openai_compat
+    vendor: deepseek
+    endpoint: https://api.deepseek.com/chat/completions
+    api_key_env: DEEPSEEK_API_KEY
+    model_id: deepseek-flash
+    send_temperature: true
+    temperature: 0.0
+    json_mode: true
+    extra_body:
+      thinking:
+        type: disabled
+    thinking:
+      type: disabled
+    price_in: 0.30
+    price_out: 1.20
+    price_note: Conservative peak, cache-miss price; off-peak is 50% lower.
+    default_workers: 8
+    max_tokens: 500
+    official_docs:
+      - https://api-docs.deepseek.com/quick_start/pricing/
+      - https://api-docs.deepseek.com/guides/thinking_mode/
+
+  deepseek-flash@high:
+    name: deepseek-flash@high
+    provider: openai_compat
+    vendor: deepseek
+    endpoint: https://api.deepseek.com/chat/completions
+    api_key_env: DEEPSEEK_API_KEY
+    model_id: deepseek-flash
+    send_temperature: false
+    temperature: null
+    json_mode: true
+    extra_body:
+      thinking:
+        type: enabled
+      reasoning_effort: high
+    thinking:
+      type: enabled
+      effort: high
+    price_in: 0.30
+    price_out: 1.20
+    price_note: Conservative peak, cache-miss price; output includes reasoning tokens.
+    default_workers: 8
+    max_tokens: 4096
+    official_docs:
+      - https://api-docs.deepseek.com/quick_start/pricing/
+      - https://api-docs.deepseek.com/guides/thinking_mode/
+
+  gemini-3.8-flash@low:
+    name: gemini-3.8-flash@low
+    provider: gemini
+    vendor: gemini
+    endpoint: https://generativelanguage.googleapis.com/v1beta/interactions
+    api_key_env: GEMINI_API_KEY
+    model_id: gemini-3.8-flash
+    send_temperature: false
+    temperature: null
+    json_mode: true
+    extra_body:
+      store: false
+    thinking: low
+    price_in: 0.75
+    price_out: 3.75
+    price_note: Introductory standard price through 2026-12-31; output includes thinking tokens.
+    default_workers: 8
+    max_tokens: 2048
+    official_docs:
+      - https://ai.google.dev/gemini-api/docs/interactions-overview
+      - https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash
+      - https://ai.google.dev/gemini-api/docs/pricing
+
+  gemini-3.8-flash@high:
+    name: gemini-3.8-flash@high
+    provider: gemini
+    vendor: gemini
+    endpoint: https://generativelanguage.googleapis.com/v1beta/interactions
+    api_key_env: GEMINI_API_KEY
+    model_id: gemini-3.8-flash
+    send_temperature: false
+    temperature: null
+    json_mode: true
+    extra_body:
+      store: false
+    thinking: high
+    price_in: 0.75
+    price_out: 3.75
+    price_note: Introductory standard price through 2026-12-31; output includes thinking tokens.
+    default_workers: 8
+    max_tokens: 4096
+    official_docs:
+      - https://ai.google.dev/gemini-api/docs/interactions-overview
+      - https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash
+      - https://ai.google.dev/gemini-api/docs/pricing
+
+  claude-sonnet-5@high:
+    name: claude-sonnet-5@high
+    provider: anthropic
+    vendor: anthropic
+    endpoint: https://api.anthropic.com/v1/messages
+    api_key_env: ANTHROPIC_API_KEY
+    model_id: claude-sonnet-5
+    send_temperature: false
+    temperature: null
+    json_mode: false
+    extra_body:
+      output_config:
+        effort: high
+    thinking:
+      type: adaptive
+    price_in: 2.00
+    price_out: 10.00
+    price_note: Standard API price; output includes thinking tokens.
+    default_workers: 4
+    max_tokens: 4096
+    anthropic_version: "2023-06-01"
+    official_docs:
+      - https://docs.anthropic.com/en/docs/about-claude/models/overview
+      - https://docs.anthropic.com/en/docs/about-claude/pricing
+      - https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking
+
+  kimi-k2.6@off:
+    name: kimi-k2.6@off
+    provider: openai_compat
+    vendor: moonshot
+    endpoint: https://api.moonshot.ai/v1/chat/completions
+    api_key_env: MOONSHOT_API_KEY
+    model_id: kimi-k2.6
+    send_temperature: false
+    temperature: null
+    json_mode: true
+    extra_body:
+      thinking:
+        type: disabled
+    thinking:
+      type: disabled
+    price_in: 0.95
+    price_out: 4.00
+    price_note: Global platform standard cache-miss price.
+    default_workers: 8
+    max_tokens: 500
+    official_docs:
+      - https://platform.kimi.ai/docs/api/overview
+      - https://platform.kimi.ai/docs/guide/use-thinking-models
+      - https://platform.kimi.ai/docs/guide/use-json-mode-feature-of-kimi-api
+
+  qwen3.8-flash@low:
+    name: qwen3.8-flash@low
+    provider: openai_compat
+    vendor: qwen
+    endpoint: https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions
+    api_key_env: DASHSCOPE_API_KEY
+    model_id: qwen3.8-flash
+    send_temperature: false
+    temperature: null
+    json_mode: true
+    extra_body:
+      enable_thinking: true
+      reasoning_effort: low
+    thinking: low
+    price_in: 0.15
+    price_out: 0.47
+    price_note: Singapore international endpoint standard price.
+    default_workers: 8
+    max_tokens: 4096
+    official_docs:
+      - https://www.alibabacloud.com/help/en/model-studio/base-url
+      - https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash
+      - https://www.alibabacloud.com/help/en/model-studio/model-pricing
+
+  qwen3.8-flash@off:
+    name: qwen3.8-flash@off
+    provider: openai_compat
+    vendor: qwen
+    endpoint: https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions
+    api_key_env: DASHSCOPE_API_KEY
+    model_id: qwen3.8-flash
+    send_temperature: false
+    temperature: null
+    json_mode: true
+    extra_body:
+      enable_thinking: false
+    thinking: disabled
+    price_in: 0.15
+    price_out: 0.47
+    price_note: Singapore international endpoint standard price.
+    default_workers: 8
+    max_tokens: 500
+    official_docs:
+      - https://www.alibabacloud.com/help/en/model-studio/base-url
+      - https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash
+      - https://www.alibabacloud.com/help/en/model-studio/model-pricing
+
+  qwen3.7-flash-2026-07-15@off:
+    name: qwen3.7-flash-2026-07-15@off
+    provider: openai_compat
+    vendor: qwen
+    endpoint: https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions
+    api_key_env: DASHSCOPE_API_KEY
+    model_id: qwen3.7-flash-2026-07-15
+    send_temperature: false
+    temperature: null
+    json_mode: true
+    extra_body:
+      enable_thinking: false
+    thinking: disabled
+    price_in: 0.03
+    price_out: 0.13
+    price_note: Singapore price rounded up for prompts <=32K; longer prompts use higher tiers.
+    default_workers: 8
+    max_tokens: 500
+    official_docs:
+      - https://www.alibabacloud.com/help/en/model-studio/base-url
+      - https://www.alibabacloud.com/help/en/model-studio/model-pricing
